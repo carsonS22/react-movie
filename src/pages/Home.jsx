@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { Link } from "react-router-dom"
 import { OutlineButton } from "../components/button/Button";
 import HeroSlide from "../components/hero-slide/HeroSlide";
 import MovieList from "../components/movie-list/MovieList";
@@ -13,6 +12,26 @@ const Home = () => {
   return (
     <>
       <HeroSlide />
+      
+    
+      <div className="site-description">
+        <div className="container">
+          <div className="site-description__content">
+            <div className="site-description__image">
+           
+            <img src="react-movie\public\theater.png" alt="Movie watchlist" />
+            </div>
+            <div className="site-description__text">
+              <h2>Welcome to PopcornQueue</h2>
+              <p>
+                Discover the latest and greatest in film and tv. Create personalized watchlists, 
+                keep track of movies you want to see, and never miss a must-watch film again. 
+                Organize your movie journey and find your next favorite with just a few clicks.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="container">
         <div className="section mb-3">

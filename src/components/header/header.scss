@@ -24,11 +24,11 @@
   left: 0;
   width: 100%;
   z-index: 99;
-  transition: height 0.3s ease, background-color 0.3s ease;
-
+  background-color:#A5B68D;
+  transition: height 0.3s ease; 
   &.shrink {
     height: $header-shrink-height;
-    background-color: $body-bg;
+    
   }
 
   &__wrap {
