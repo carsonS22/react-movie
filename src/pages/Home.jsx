@@ -19,7 +19,7 @@ const Home = () => {
           <div className="site-description__content">
             <div className="site-description__image">
            
-            <img src="react-movie\public\theater.png" alt="Movie watchlist" />
+            <img src="\theater.png" alt="Movie watchlist" />
             </div>
             <div className="site-description__text">
               <h2>Welcome to PopcornQueue</h2>
