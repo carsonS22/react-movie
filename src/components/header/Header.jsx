@@ -74,15 +74,14 @@ const Header = () => {
           <Link to={`/${Config.HOME_PAGE}`}><h2>PopcornQueue</h2></Link>
         </div>
 
-        <ul className="header__nav">
-          {headerNav.map((e, i) => (
-            <li key={i} className={`${i === active ? "active" : ""}`}>
-              <Link to={e.path}>{e.display}</Link>
-            </li>
-          ))}
-        </ul>
-
         <div className="header__search">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
           <div className="header__search__category">
             <select 
               value={searchCategory} 
@@ -92,17 +91,18 @@ const Header = () => {
               <option value={category.tv}>TV</option>
             </select>
           </div>
-          <input
-            type="text"
-            placeholder="Search..."
-            value={searchKeyword}
-            onChange={(e) => setSearchKeyword(e.target.value)}
-            onKeyPress={handleKeyPress}
-          />
           <button onClick={handleSearch}>
             <i className="bx bx-search"></i>
           </button>
         </div>
+
+        <ul className="header__nav">
+          {headerNav.map((e, i) => (
+            <li key={i} className={`${i === active ? "active" : ""}`}>
+              <Link to={e.path}>{e.display}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

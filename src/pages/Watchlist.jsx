@@ -4,7 +4,7 @@ import "./watchlist.scss";
 
 import PageHeader from "../components/page-header/PageHeader";
 import MovieCard from "../components/movie-card/MovieCard";
-import watchlistService from "../services/watchlistService";
+import watchlistService from "../watchlistService";
 import * as Config from "../constants/Config";
 import { OutlineButton } from "../components/button/Button";
 

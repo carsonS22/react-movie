@@ -9,7 +9,7 @@ import CastList from "./CastList";
 import VideoList from "./VideoList";
 import MovieList from "./../../components/movie-list/MovieList";
 import Button from "../../components/button/Button";
-import watchlistService from "../../services/watchlistService";
+import watchlistService from "../../watchlistService";
 
 const Detail = () => {
   const { category, id } = useParams();
@@ -27,16 +27,16 @@ const Detail = () => {
 
   useEffect(() => {
     if (item) {
-      // Check if the current item is in the watchlist
+      
       const inWatchlist = watchlistService.isInWatchlist(parseInt(id), category);
-      console.log("Item in watchlist:", inWatchlist); // Debug log
+      console.log("Item in watchlist:", inWatchlist);
       setIsInWatchlist(inWatchlist);
     }
   }, [item, id, category]);
 
   const toggleWatchlist = () => {
     if (isInWatchlist) {
-      console.log("Removing from watchlist:", id, category); // Debug log
+      console.log("Removing from watchlist:", id, category); 
       watchlistService.removeFromWatchlist(parseInt(id), category);
       setIsInWatchlist(false);
     } else {
@@ -47,7 +47,7 @@ const Detail = () => {
         backdrop_path: item.backdrop_path,
         category: category
       };
-      console.log("Adding to watchlist:", watchlistItem); // Debug log
+      console.log("Adding to watchlist:", watchlistItem); 
       watchlistService.addToWatchlist(watchlistItem);
       setIsInWatchlist(true);
     }

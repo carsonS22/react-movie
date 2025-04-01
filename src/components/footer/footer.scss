@@ -2,12 +2,11 @@
 
 .footer {
   background-color: #56663f;
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  position: static; 
   width: 100%;
   z-index: 99;
   padding: 2rem 0;
+  margin-top: 2rem; 
 
   .footer__content {
     display: flex;
