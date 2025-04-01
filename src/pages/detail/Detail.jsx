@@ -8,11 +8,13 @@ import "./detail.scss";
 import CastList from "./CastList";
 import VideoList from "./VideoList";
 import MovieList from "./../../components/movie-list/MovieList";
+import Button from "../../components/button/Button";
+import watchlistService from "../../services/watchlistService";
 
 const Detail = () => {
   const { category, id } = useParams();
-
   const [item, setItem] = useState(null);
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
 
   useEffect(() => {
     const getDetail = async () => {
@@ -22,6 +24,34 @@ const Detail = () => {
     };
     getDetail();
   }, [category, id]);
+
+  useEffect(() => {
+    if (item) {
+      // Check if the current item is in the watchlist
+      const inWatchlist = watchlistService.isInWatchlist(parseInt(id), category);
+      console.log("Item in watchlist:", inWatchlist); // Debug log
+      setIsInWatchlist(inWatchlist);
+    }
+  }, [item, id, category]);
+
+  const toggleWatchlist = () => {
+    if (isInWatchlist) {
+      console.log("Removing from watchlist:", id, category); // Debug log
+      watchlistService.removeFromWatchlist(parseInt(id), category);
+      setIsInWatchlist(false);
+    } else {
+      const watchlistItem = {
+        id: parseInt(id),
+        title: item.title || item.name,
+        poster_path: item.poster_path,
+        backdrop_path: item.backdrop_path,
+        category: category
+      };
+      console.log("Adding to watchlist:", watchlistItem); // Debug log
+      watchlistService.addToWatchlist(watchlistItem);
+      setIsInWatchlist(true);
+    }
+  };
 
   return (
     <>
@@ -46,6 +76,19 @@ const Detail = () => {
                   )})`,
                 }}
               ></div>
+              <div className="watchlist-action">
+                <Button onClick={toggleWatchlist}>
+                  {isInWatchlist ? (
+                    <>
+                      <i className="bx bx-check"></i> Remove from Watchlist
+                    </>
+                  ) : (
+                    <>
+                      <i className="bx bx-plus"></i> Add to Watchlist
+                    </>
+                  )}
+                </Button>
+              </div>
             </div>
 
             <div className="movie-content__info">
@@ -63,7 +106,6 @@ const Detail = () => {
                 <div className="section__header">
                   <h2>Casts</h2>
                 </div>
-                {/* casts list */}
                 <CastList id={item.id} />
               </div>
             </div>

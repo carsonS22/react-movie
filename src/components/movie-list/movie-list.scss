@@ -1,6 +1,8 @@
 @use "./../../scss/breakpoint" as *;
 
 .movie-list {
+  position: relative;
+  
   .swiper-slide {
     width: 15%;
 
@@ -10,6 +12,58 @@
 
     @include mobile {
       width: 40%;
+    }
+  }
+
+  &__navigation {
+    &__prev, 
+    &__next {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(95, 139, 76, 0.5);
+      border-radius: 50%;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #FFDDAB;
+      font-size: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(95, 139, 76, 0.8);
+      }
+    }
+
+    &__prev {
+      left: -20px;
+    }
+
+    &__next {
+      right: -20px;
+    }
+  }
+
+  @include mobile {
+    &__navigation {
+      &__prev, 
+      &__next {
+        width: 30px;
+        height: 30px;
+        font-size: 1.5rem;
+      }
+
+      &__prev {
+        left: -15px;
+      }
+
+      &__next {
+        right: -15px;
+      }
     }
   }
 }

@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 import "./header.scss";
 
 import logo from "./../../assets/logo.png";
-
 import * as Config from "./../../constants/Config";
+import { category } from "../../api/tmdbApi";
 
 const headerNav = [
   {
@@ -16,11 +16,19 @@ const headerNav = [
     display: <h4>TV Series</h4>,
     path: `/${Config.HOME_PAGE}/tv`,
   },
+  {
+    display: <h4>Watchlist</h4>,
+    path: `/${Config.HOME_PAGE}/watchlist`,
+  },
 ];
 
 const Header = () => {
   const { pathname } = useLocation();
   const headerRef = useRef(null);
+  const history = useHistory();
+
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchCategory, setSearchCategory] = useState(category.movie);
 
   const active = headerNav.findIndex((e) => e.path === pathname);
 
@@ -43,6 +51,21 @@ const Header = () => {
     };
   }, []);
 
+  const handleSearch = () => {
+    if (searchKeyword.trim().length > 0) {
+      history.push(
+        `/${Config.HOME_PAGE}/${searchCategory}/search/${searchKeyword}`
+      );
+      setSearchKeyword("");
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div ref={headerRef} className="header">
       <div className="header__wrap container">
@@ -58,6 +81,28 @@ const Header = () => {
             </li>
           ))}
         </ul>
+
+        <div className="header__search">
+          <div className="header__search__category">
+            <select 
+              value={searchCategory} 
+              onChange={(e) => setSearchCategory(e.target.value)}
+            >
+              <option value={category.movie}>Movies</option>
+              <option value={category.tv}>TV</option>
+            </select>
+          </div>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
+          <button onClick={handleSearch}>
+            <i className="bx bx-search"></i>
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import SwiperCore, { Autoplay } from "swiper";
+import SwiperCore, { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import Button, { OutlineButton } from "./../button/Button";
@@ -15,9 +15,11 @@ import { useHistory } from "react-router";
 import * as Config from "./../../constants/Config";
 
 const HeroSlide = () => {
-  SwiperCore.use([Autoplay]);
+  SwiperCore.use([Autoplay, Navigation]);
 
   const [movieItems, setMovieItems] = useState([]);
+  const navigationPrevRef = useRef(null);
+  const navigationNextRef = useRef(null);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -37,17 +39,31 @@ const HeroSlide = () => {
 
   return (
     <div className="hero-slide">
+      <div className="hero-slide__nav hero-slide__nav--prev" ref={navigationPrevRef}>
+        <i className="bx bx-chevron-left"></i>
+      </div>
+      <div className="hero-slide__nav hero-slide__nav--next" ref={navigationNextRef}>
+        <i className="bx bx-chevron-right"></i>
+      </div>
+      
       <Swiper
-        modules={[Autoplay]}
-        grabCursor={true}
+        modules={[Autoplay, Navigation]}
+        grabCursor={false}
         spaceBetween={0}
         slidesPerView={1}
         autoplay={{ delay: 4000 }}
+        navigation={{
+          prevEl: navigationPrevRef.current,
+          nextEl: navigationNextRef.current,
+        }}
+        onBeforeInit={(swiper) => {
+          swiper.params.navigation.prevEl = navigationPrevRef.current;
+          swiper.params.navigation.nextEl = navigationNextRef.current;
+        }}
       >
         {movieItems.map((item, index) => (
           <SwiperSlide key={index}>
             {({ isActive }) => (
-              // eslint-disable-next-line jsx-a11y/alt-text
               <HeroSlideItem
                 item={item}
                 className={`${isActive ? "active" : ""}`}

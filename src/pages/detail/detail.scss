@@ -52,6 +52,22 @@
       background-repeat: no-repeat;
       border-radius: $border-radius;
       padding-top: 165%;
+      margin-bottom: 1rem;
+    }
+
+    .watchlist-action {
+      margin-top: 1rem;
+      button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        
+        i {
+          font-size: 1.2rem;
+        }
+      }
     }
   }
 
