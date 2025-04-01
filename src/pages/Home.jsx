@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { OutlineButton } from "../components/button/Button";
 import HeroSlide from "../components/hero-slide/HeroSlide";
 import MovieList from "../components/movie-list/MovieList";
-import tmovie from "./../../assets/tmovie.png";
+
 
 import { category, movieType, tvType } from "../api/tmdbApi";
 
@@ -20,7 +20,7 @@ const Home = () => {
           <div className="site-description__content">
             <div className="site-description__image">
            
-            <img src={tmovie} alt="Movie theater" />
+            <img src="/theater.png" alt="Movie watchlist" />
             </div>
             <div className="site-description__text">
               <h2>Welcome to PopcornQueue</h2>

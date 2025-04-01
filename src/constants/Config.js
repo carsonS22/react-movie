@@ -1,1 +1,1 @@
-export const HOME_PAGE = "react-movie-app";
+export const HOME_PAGE = "popcornqueue";

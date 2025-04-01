@@ -9,15 +9,11 @@ import * as Config from "./../../constants/Config";
 
 const headerNav = [
   {
-    display: "Home",
-    path: `/${Config.HOME_PAGE}`,
-  },
-  {
-    display: "Movies",
+    display: <h4>Movies</h4>,
     path: `/${Config.HOME_PAGE}/movie`,
   },
   {
-    display: "TV Series",
+    display: <h4>TV Series</h4>,
     path: `/${Config.HOME_PAGE}/tv`,
   },
 ];
@@ -52,7 +48,7 @@ const Header = () => {
       <div className="header__wrap container">
         <div className="logo">
           <img src={logo} alt="logo" />
-          <Link to={`/${Config.HOME_PAGE}`}>PopcornQueue</Link>
+          <Link to={`/${Config.HOME_PAGE}`}><h2>PopcornQueue</h2></Link>
         </div>
 
         <ul className="header__nav">
